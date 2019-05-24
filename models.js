@@ -13,7 +13,8 @@ const Plot = db.define('plots', {
 
 const Vegetable = db.define('vegetables', {
   name: Sequelize.STRING,
-  color: Sequelize.STRING
+  color: Sequelize.STRING,
+  plantedOn: Sequelize.DATE
 })
 
 module.exports = db
