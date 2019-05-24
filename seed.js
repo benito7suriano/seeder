@@ -31,15 +31,14 @@
  * })
  *  .catch(err => console.error(err))
  */
+const { db } = require('./models')
 
-const db = require('./models')
-
-db.sync({force: true})
+db.sync({ force: true })
   .then(() => {
+    console.log('Db sync\'d')
     db.close()
   })
   .catch(() => {
     console.error('There has been some kind of error. Please try again later.')
     db.close()
   })
-
