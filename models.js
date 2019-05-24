@@ -17,4 +17,12 @@ const Vegetable = db.define('vegetables', {
   plantedOn: Sequelize.DATE
 })
 
-module.exports = db
+// One-to-many
+Plot.belongsTo(Gardener)
+Gardener.hasOne(Plot)
+
+// Many-to-many
+Vegetable.belongsToMany(Plot, {through: 'vegetable_plot'})
+Plot.belongsToMany(Vegetable, {through: 'vegetable-plot'})
+
+module.exports = { db, Gardener, Plot, Vegetable }
