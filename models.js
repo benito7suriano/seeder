@@ -23,7 +23,7 @@ Gardener.hasOne(Plot)
 
 // Many-to-many
 Vegetable.belongsToMany(Plot, {through: 'vegetable_plot'})
-Plot.belongsToMany(Vegetable, {through: 'vegetable-plot'})
+Plot.belongsToMany(Vegetable, {through: 'vegetable_plot'})
 
 Gardener.belongsTo(Vegetable, {as: 'favorite_vegetable'})
 

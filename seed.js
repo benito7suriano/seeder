@@ -31,11 +31,31 @@
  * })
  *  .catch(err => console.error(err))
  */
-const { db } = require('./models')
+const { db, Gardener, Plot, Vegetable } = require('./models')
+
+let brocolliG
 
 db.sync({ force: true })
   .then(() => {
     console.log('Db sync\'d')
+    return Promise.all([
+      Vegetable.create({name: 'brocolli'}),
+      Vegetable.create({name: 'cauliflor'}),
+      Vegetable.create({name: 'lettuce'})
+    ])
+  })
+  .then(([brocolli, cauliflor, lettuce]) => {
+    brocolliG = brocolli
+
+    return Gardener.create({name: 'Beno', favoriteVegetableId: brocolli.id})
+  })
+  .then((beno) => {
+    return Plot.create({
+      gardenerId: beno.id
+    })
+  })
+  .then((plot) => {
+    return plot.addVegetable(brocolliG)
     db.close()
   })
   .catch(() => {
